@@ -118,6 +118,7 @@ func parsePSISection(i []byte, offset *int) (s *PSISection, stop bool, err error
 	if s.Header.SectionLength > 0 {
 		// Parse syntax
 		s.Syntax = parsePSISectionSyntax(i, offset, s.Header, offsetSectionsEnd)
+		*offset = offsetSectionsEnd
 
 		// Process CRC32
 		if hasCRC32(s.Header.TableType) {
