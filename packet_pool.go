@@ -5,6 +5,8 @@ import (
 	"sync"
 )
 
+const totPID = 20
+
 // packetPool represents a pool of packets
 type packetPool struct {
 	b map[uint16][]*Packet // Indexed by PID
@@ -50,6 +52,12 @@ func (b *packetPool) add(p *Packet) (ps []*Packet) {
 
 	// Throw away packet if it's the same as the previous one
 	if isSameAsPrevious(mps, p) {
+		return
+	}
+
+	// If it is's TOT, return it immidiately. (don't pool.)
+	if p.Header.PID == totPID {
+		ps = []*Packet{p}
 		return
 	}
 
