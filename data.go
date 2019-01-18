@@ -12,6 +12,10 @@ const (
 	PIDNull = 0x1fff // Null Packet (used for fixed bandwidth padding)
 )
 
+type UnknownData struct {
+	Payload []byte
+}
+
 // Data represents a data
 type Data struct {
 	EIT         *EITData
@@ -23,6 +27,7 @@ type Data struct {
 	PMT         *PMTData
 	SDT         *SDTData
 	TOT         *TOTData
+	Unknown     *UnknownData
 }
 
 // parseData parses a payload spanning over multiple packets and returns a set of data
@@ -72,6 +77,8 @@ func parseData(ps []*Packet, prs PacketsParser, pm programMap) (ds []*Data, err 
 				PID:         pid,
 			})
 		}
+	} else {
+		ds = append(ds, &Data{PID: pid, FirstPacket: ps[0], Unknown: &UnknownData{Payload: payload}})
 	}
 	return
 }

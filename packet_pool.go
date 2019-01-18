@@ -19,6 +19,8 @@ func newPacketPool() *packetPool {
 	}
 }
 
+const elementalSCTE35PID = 500
+
 // add adds a new packet to the pool
 func (b *packetPool) add(p *Packet) (ps []*Packet) {
 	// Throw away packet if error indicator
@@ -29,6 +31,12 @@ func (b *packetPool) add(p *Packet) (ps []*Packet) {
 	// Throw away packets that don't have a payload until we figure out what we're going to do with them
 	// TODO figure out what we're going to do with them :D
 	if !p.Header.HasPayload {
+		return
+	}
+
+	// return scte 35
+	if p.Header.PID == elementalSCTE35PID {
+		ps = []*Packet{p}
 		return
 	}
 
