@@ -1,3 +1,5 @@
+# このブランチ `radio-stream` はradio-archiver専用です。強引に1件目のTOTを取るようにしています。 このまま本流にはマージしないでください。
+
 [![GoReportCard](http://goreportcard.com/badge/github.com/asticode/go-astits)](http://goreportcard.com/report/github.com/asticode/go-astits)
 [![GoDoc](https://godoc.org/github.com/asticode/go-astits?status.svg)](https://godoc.org/github.com/asticode/go-astits)
 [![Travis](https://travis-ci.org/asticode/go-astits.svg?branch=master)](https://travis-ci.org/asticode/go-astits#)
