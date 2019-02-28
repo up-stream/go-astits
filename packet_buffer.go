@@ -38,7 +38,7 @@ func newPacketBuffer(r io.Reader, packetSize int) (pb *packetBuffer, err error) 
 // Assumption is made that the first byte of the reader is a sync byte
 func autoDetectPacketSize(r io.Reader) (packetSize int, err error) {
 	// Read first bytes
-	const l = 193
+	const l = 205
 	var b = make([]byte, l)
 	if _, err = r.Read(b); err != nil {
 		err = errors.Wrapf(err, "astits: reading first %d bytes failed", l)
